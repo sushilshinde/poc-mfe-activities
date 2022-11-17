@@ -34,7 +34,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: path.join(__dirname, "public", "index.html"),
+      template: path.join(__dirname, "src", "index.html"),
     }),
     new MiniCssExtractPlugin(),
     // MODULE FEDERATION
@@ -42,7 +42,7 @@ module.exports = {
         name: "Activities",
         filename: "moduleEntry.js",
         exposes: {
-            "./CommitsCard": "./src/App.js"
+            "./CommitsCard": "./src/components/CommitsCard"
         },
         shared: {
             ...dependencies,

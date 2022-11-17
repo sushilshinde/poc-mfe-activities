@@ -1,9 +1,9 @@
-import "./App.css";
+import "./index.css";
 
-function App() {
+function CommitsCard() {
   return (
     <div className="card p-5 mt-4">
-      <h3 className="mb-4">Weekly Commit</h3>
+      <h3 className="mb-4">Weekly Commits</h3>
       <ul className="list-group list-group-flush">
         <li className="list-group-item">An item</li>
         <li className="list-group-item">A second item</li>
@@ -15,4 +15,4 @@ function App() {
   );
 }
 
-export default App;
+export default CommitsCard;
