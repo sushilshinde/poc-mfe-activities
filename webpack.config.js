@@ -1,9 +1,13 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin")
+const webpack = require('webpack')
 
 const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPlugin")
 const { dependencies } = require('./package.json')
+const dotenv = require('dotenv');
+
+const env = dotenv.config().parsed
 
 module.exports = {
   entry: path.join(__dirname, "src", "index.js"),
@@ -42,7 +46,7 @@ module.exports = {
         name: "Activities",
         filename: "moduleEntry.js",
         exposes: {
-            "./CommitsCard": "./src/components/CommitsCard"
+            "./StarredRepos": "./src/components/StarredRepos"
         },
         shared: {
             ...dependencies,
@@ -55,7 +59,11 @@ module.exports = {
                 requiredVersion: dependencies['react-dom']
             }
         }
-    })
+    }),
+    new webpack.DefinePlugin(Object.keys(env).reduce((prev, next) => {
+      prev[`process.env.${next}`] = JSON.stringify(env[next]);
+      return prev;
+    }, {}))
   ],
   resolve: {
     extensions: ["*", ".js", ".jsx"]
