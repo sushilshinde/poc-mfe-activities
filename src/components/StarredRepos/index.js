@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { getStarredRepos } from "../../services/githubService";
+import Loader from "../Loader";
 import "./index.css";
 
 /**
@@ -11,6 +12,7 @@ import "./index.css";
 function StarredRepos() {
     const [searchTerm, setSearchTerm] = useState("");
     const [starredRepos, setStarredRepos] = useState([]);
+    const [loading, setLoading] = useState(false)
     useEffect(() => {
         window.addEventListener("getSearchTerm", (event) => {
             setSearchTerm(event.detail);
@@ -22,11 +24,15 @@ function StarredRepos() {
 
     useEffect(() => {
         if (searchTerm.trim()) {
+            setStarredRepos([])
+            setLoading(true)
             getStarredRepos(searchTerm).then((data) => {
+                setLoading(false)
                 setStarredRepos(data);
             });
         } else {
             setStarredRepos([]);
+            setLoading(false)
         }
     }, [searchTerm]);
 
@@ -34,6 +40,7 @@ function StarredRepos() {
         <div className="card p-5 mt-4">
             <h3 className="card-header">Starred Repositories</h3>
             <ul className="list-group list-group-flush">
+                {loading && <Loader />}
                 {starredRepos.length > 0 &&
                     starredRepos.map(({ id, name, html_url }) => (
                         <li className="list-group-item" key={id}>
