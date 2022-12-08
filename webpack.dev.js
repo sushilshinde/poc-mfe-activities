@@ -8,7 +8,7 @@ const { dependencies } = require('./package.json')
 const dotenv = require('dotenv');
 
 
-const env = dotenv.config().parsed || { API_URL: 'https://localhost:3000/' }// dotenv.config().parsed
+const env = dotenv.config().parsed || { API_URL: 'https://localhost:4444/starred/' }// dotenv.config().parsed
 
 module.exports = {
   entry: path.join(__dirname, "src", "index.js"),
