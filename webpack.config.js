@@ -7,7 +7,7 @@ const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPl
 const { dependencies } = require('./package.json')
 const dotenv = require('dotenv');
 
-const env = dotenv.config().parsed
+const env = { API_URL: 'https://poc-mfe-github-api.cyclic.app/' }// dotenv.config().parsed
 console.log("************************")
 console.log(env)
 
