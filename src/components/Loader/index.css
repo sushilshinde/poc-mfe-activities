@@ -1,0 +1,27 @@
+.background-masker {
+    background-color: #fff;
+    position: absolute;
+}
+
+.animated-background {
+    margin: 15px 0;
+    animation-duration: 2s;
+    animation-fill-mode: forwards;
+    animation-iteration-count: infinite;
+    animation-name: placeHolderShimmer;
+    animation-timing-function: linear;
+    background-color: #f6f7f8;
+    background: linear-gradient(to right, rgb(13 110 253 / 25%) 8%, rgb(195 204 218 / 25%) 18%, rgb(13 110 253 / 10%) 33%);
+    background-size: 800px 104px;
+    height: 30px;
+    position: relative;
+}
+
+@keyframes placeHolderShimmer {
+    0% {
+        background-position: -800px 0;
+    }
+    100% {
+        background-position: 800px 0;
+    }
+}
