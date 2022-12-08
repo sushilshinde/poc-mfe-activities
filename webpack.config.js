@@ -8,6 +8,8 @@ const { dependencies } = require('./package.json')
 const dotenv = require('dotenv');
 
 const env = dotenv.config().parsed
+console.log("************************")
+console.log(env)
 
 module.exports = {
   entry: path.join(__dirname, "src", "index.js"),
