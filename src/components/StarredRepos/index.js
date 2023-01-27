@@ -12,7 +12,7 @@ import "./index.css";
 function StarredRepos() {
     const [searchTerm, setSearchTerm] = useState("");
     const [starredRepos, setStarredRepos] = useState([]);
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(false);
     useEffect(() => {
         window.addEventListener("getSearchTerm", (event) => {
             setSearchTerm(event.detail);
@@ -24,15 +24,23 @@ function StarredRepos() {
 
     useEffect(() => {
         if (searchTerm.trim()) {
-            setStarredRepos([])
-            setLoading(true)
+            setStarredRepos([]);
+            setLoading(true);
             getStarredRepos(searchTerm).then((data) => {
-                setLoading(false)
+                if (data.status === 401) {
+                    setStarredRepos([]);
+                    setLoading(false);
+                    const event = new CustomEvent("JWT_EXPIRED", {
+                        detail: true,
+                    });
+                    window.dispatchEvent(event);
+                }
+                setLoading(false);
                 setStarredRepos(data);
             });
         } else {
             setStarredRepos([]);
-            setLoading(false)
+            setLoading(false);
         }
     }, [searchTerm]);
 
@@ -44,7 +52,7 @@ function StarredRepos() {
                 {starredRepos.length > 0 &&
                     starredRepos.map(({ id, name, html_url }) => (
                         <li className="list-group-item" key={id}>
-                            <i class="fa fa-caret-right"></i>
+                            <i className="fa fa-caret-right"></i>
                             <a href={html_url} target="_blank" rel="noreferrer">
                                 {name}
                             </a>
