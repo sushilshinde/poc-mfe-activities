@@ -4,7 +4,8 @@
 Ensure the API Server application is running by following the steps mentioned in the 
 [Documentation for Local Deployment](https://wiki.msystechnologies.com/doc/mfe-documentation-Ng5uksSbT2/edit#h-local-deployment)
 
-Also create an environment configuration file by the format mentioned in the example `.env.example` file by providing the API Server Application URL.
+## Environment Configuration:
+Set env variables as per below syntax before running the app provided in .env.example file
 
 ## Available Scripts
 
